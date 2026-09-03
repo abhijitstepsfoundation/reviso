@@ -1,0 +1,11 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // No client ever reads or writes the bucket directly.
+    // All uploads and downloads are mediated by the Cloud Run backend,
+    // which verifies a Firebase ID token before touching any object.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
