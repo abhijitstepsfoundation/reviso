@@ -1,0 +1,51 @@
+/* Exam and report presentation */
+
+.exam-head { display: flex; justify-content: space-between; margin-bottom: 10px; gap: 12px; }
+
+.progress { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 24px; }
+.progress-fill { height: 100%; background: var(--accent); transition: width 0.3s ease; }
+
+.question-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 22px; margin-bottom: 18px;
+}
+.qmeta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.question { font-size: 19px; line-height: 1.5; margin: 0; }
+
+.answer {
+  width: 100%; font: inherit; font-size: 16px; padding: 14px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface); color: var(--ink);
+  resize: vertical; line-height: 1.6;
+}
+.answer:focus { outline: none; border-color: var(--accent); }
+.answer::placeholder { color: var(--muted); }
+
+.exam-actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+.hint { margin-top: 16px; }
+
+.score-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 24px;
+}
+.score { font-size: 40px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
+.score span { font-size: 18px; color: var(--muted); font-weight: 400; }
+.headline { margin: 0; font-size: 16px; }
+
+.report-block { margin-bottom: 28px; }
+.report-block h3 { font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+.report-block ul { margin: 8px 0 0; padding-left: 20px; }
+.report-block li { margin-bottom: 8px; }
+
+.plan-item {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+}
+.plan-topic { font-weight: 600; margin-bottom: 4px; }
+
+@media (max-width: 640px) {
+  .question { font-size: 17px; }
+  .question-card { padding: 18px; }
+  .score-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px; }
+  .exam-actions .btn { flex: 1 1 auto; }
+}

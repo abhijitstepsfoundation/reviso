@@ -1,0 +1,54 @@
+/* Written exam: paper, script upload, marked script */
+
+.paper {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 32px; margin-bottom: 20px;
+}
+.paper-head { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 20px; }
+.paper-head h2 { margin: 0 0 6px; }
+.paper-head p { margin: 8px 0 0; }
+
+.paper-q { display: flex; gap: 12px; margin-bottom: 22px; }
+.paper-qnum { font-weight: 600; white-space: nowrap; }
+.paper-qnum .marks { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.paper-qtext { flex: 1; }
+
+.submit-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.submit-block h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+
+.thumbs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.thumb {
+  border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: var(--surface); width: 150px;
+}
+.thumb img { width: 100%; height: 120px; object-fit: cover; display: block; }
+.thumb-bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; }
+
+.notice {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 20px;
+  font-size: 14px; color: var(--ink);
+}
+
+.marked-q {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;
+}
+.marked-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
+.marked-num { font-weight: 600; }
+.marked-q p { margin: 6px 0; font-size: 15px; }
+.misconception { color: var(--warn); }
+
+@media (max-width: 640px) {
+  .paper { padding: 20px; }
+  .thumb { width: calc(50% - 6px); }
+  .thumb img { height: 100px; }
+}
+
+@media print {
+  .no-print, .topbar { display: none !important; }
+  body { background: #fff; color: #000; }
+  .paper { border: none; padding: 0; background: #fff; }
+  .container { max-width: none; padding: 0; }
+  .paper-q { page-break-inside: avoid; }
+}

@@ -3,7 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reviso — Your Personal AI Examiner</title>
+
+    <title>Reviso — Find out what you actually understand</title>
+    <meta
+      name="description"
+      content="Reviso examines you on your own syllabus, textbook or notes. Adaptive oral vivas, written papers marked from your handwriting, and a profile that separates what you haven't learned from what you've learned wrong."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Reviso" />
+    <meta property="og:title" content="Reviso — Find out what you actually understand" />
+    <meta
+      property="og:description"
+      content="An AI examiner, not another AI tutor. Upload a chapter, sit an adaptive oral viva or a written paper marked from your handwriting, and see exactly where your understanding breaks down."
+    />
+    <meta
+      property="og:image"
+      content="https://reviso-ai-903171002994.asia-south1.run.app/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:url"
+      content="https://reviso-ai-903171002994.asia-south1.run.app/"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Reviso — Find out what you actually understand" />
+    <meta
+      name="twitter:description"
+      content="An AI examiner, not another AI tutor. Built with Gemini, Firebase and Cloud Run."
+    />
+    <meta
+      name="twitter:image"
+      content="https://reviso-ai-903171002994.asia-south1.run.app/og.png"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#1f4fd8" />
+
+    <script>
+      // Applies the saved theme before first paint so there is no flash.
+      (function () {
+        try {
+          var saved = localStorage.getItem('reviso-theme');
+          var dark =
+            saved === 'dark' ||
+            (!saved &&
+              window.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

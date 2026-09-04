@@ -12,8 +12,15 @@ export function errorHandler(
   _next: NextFunction
 ) {
   console.error('Unhandled error:', err?.message || err);
+
+  if (err?.code === 'LIMIT_FILE_SIZE') {
+    res.status(400).json({ error: 'That file is larger than 10 MB.' });
+    return;
+  }
+
   const status = Number(err?.status) || 500;
   res.status(status).json({
-    error: status === 500 ? 'Something went wrong. Please try again.' : err.message,
+    error:
+      status === 500 ? 'Something went wrong. Please try again.' : err.message,
   });
 }

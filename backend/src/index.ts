@@ -4,16 +4,52 @@ import { config } from './config';
 import health from './routes/health';
 import me from './routes/me';
 import diag from './routes/diag';
+import materials from './routes/materials';
+import sessions from './routes/sessions';
+import exams from './routes/exams';
+import profile from './routes/profile';
 import { notFound, errorHandler } from './middleware/errors';
+import { securityHeaders, rateLimit } from './middleware/security';
+import { requireAuth } from './middleware/auth';
 
 const app = express();
+
+// Cloud Run terminates TLS upstream; trust its forwarding headers so that
+// req.ip reflects the real client for rate limiting.
+app.set('trust proxy', true);
+app.disable('x-powered-by');
+
+app.use(securityHeaders);
 app.use(express.json({ limit: '25mb' }));
 
 // --- API ---
 const api = express.Router();
+
 api.use(health);
+
+// Everything below requires a verified Firebase ID token. Rate limits are
+// keyed on the authenticated uid, so they are applied after verification.
+api.use(requireAuth);
+api.use(rateLimit(120, 60_000));
+
+// The AI endpoints are the expensive ones and get a tighter limit.
+api.use(['/materials', '/sessions', '/exams', '/profile'], (req, res, next) => {
+  if (req.method === 'GET') return next();
+  return rateLimit(20, 60_000)(req, res, next);
+});
+
 api.use(me);
-api.use(diag);
+api.use(materials);
+api.use(sessions);
+api.use(exams);
+api.use(profile);
+
+// Diagnostics expose model availability. Useful while building, off by
+// default in production.
+if (process.env.ENABLE_DIAG === 'true') {
+  api.use(diag);
+}
+
 app.use('/api', api);
 app.use('/api', notFound);
 
